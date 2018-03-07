@@ -1,0 +1,30 @@
+{
+  "name": "lichessapps",
+  "version": "0.0.1",
+  "description": "lichessapps",
+  "main": "server/index.js",
+  "dependencies": {
+    "@types/node": "^9.4.6",
+    "express": "^4.16.2",
+    "mongodb": "^2.2.35",
+    "morgan": "^1.9.0"
+  },
+  "engine": {
+    "node": "*",
+    "npm": "*"
+  },
+  "scripts": {
+    "start": "node server/index.js",
+    "test": "IP=0.0.0.0 PORT=3030 mocha --timeout 5000 tests/*_test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lichessapps/openshift"
+  },
+  "author": "Lichess Apps <lichessapps@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lichessapps/openshift/issues"
+  },
+  "homepage": "https://github.com/lichessapps/openshift"
+}
