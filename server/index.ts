@@ -1,3 +1,5 @@
+// server startup
+
 app.use(morgan('combined'))
 app.use(express.static('server/assets'))
 
