@@ -88,6 +88,25 @@ for (let key in TOURNEY_SCHEDULE) {
         });
     });
 }
+const DiscordIo = require('discord.io');
+let TOKEN = process.env.DISCORDWATCHDOG_TOKEN;
+console.log("TOKEN", TOKEN);
+let bot = new DiscordIo.Client({
+    token: TOKEN,
+    autorun: true
+});
+console.log("bot", bot);
+bot.on('ready', function () {
+    console.log('Logged in as %s - %s\n', bot.username, bot.id);
+});
+bot.on('message', function (user, userID, channelID, message, event) {
+    if (message === "ping") {
+        bot.sendMessage({
+            to: channelID,
+            message: "pong"
+        });
+    }
+});
 // server startup
 const app = express();
 app.use(morgan('combined'));

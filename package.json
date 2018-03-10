@@ -5,6 +5,7 @@
   "main": "server/index.js",
   "dependencies": {
     "@types/node": "^9.4.6",
+    "discord.io": "github:woor/discord.io#gateway_v6",
     "express": "^4.16.2",
     "form-data": "^2.3.2",
     "mongodb": "^2.2.35",
