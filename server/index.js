@@ -109,7 +109,7 @@ bot.on('message', function (user, userID, channelID, message, event) {
                 let msg = `Hi there **${user}** ! I'm **WatchDog** applied to monitor bot commands. ` +
                     `It looks as if you are trying to issue a bot command. ` +
                     `If you got your expected response, then fine. If not, the reason may be that bot servers are not running. ` +
-                    `If you don't see **AtomBot**, **TestBot** or **DevBot** listed being online, the please refer to the **#activatebots** channel, to wake them up. ` +
+                    `If you don't see **AtomBot**, **TestBot** or **DevBot** listed being online, then please refer to the **#activatebots** channel, to wake them up. ` +
                     `When bots are up, try to issue your command again. ` +
                     `If it still does not work, the command format may have been wrong. ` +
                     `In this case refer to the **#faq** channel for available commands. ` +
