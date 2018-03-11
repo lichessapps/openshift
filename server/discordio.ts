@@ -4,8 +4,8 @@ let TOKEN=process.env.DISCORDWATCHDOG_TOKEN
 
 const SERVER_ID = "407793962527752192"
 
-const BOT_SERVER_EARLY_URL = "http://quiet-tor-66877.herokuapp.com/"
-const BOT_SERVER_LATE_URL = "http://rocky-cove-85948.herokuapp.com/"
+const BOT_SERVER_MAIN_URL = "http://quiet-tor-66877.herokuapp.com/"
+const BOT_SERVER_RESERVE_URL = "http://rocky-cove-85948.herokuapp.com/"
 
 console.log("TOKEN",TOKEN)
 
@@ -13,20 +13,6 @@ let bot = new DiscordIo.Client({
     token: TOKEN,
     autorun: true
 })
-
-console.log("bot initial",bot)
-
-/*
-bot.sendMessage({to: channelID, message: Object.values(
-    bot.servers[bot.channels[channelID].guild_id].members
-).filter(u => u.bot).map(u => "<@"+u.id+">").join(" ")
-*/
-
-function getBotServerUrlByDayOfMonth():string{
-    let now=new Date()
-    let dayOfMonth=now.getDate()
-    return dayOfMonth<=20?BOT_SERVER_EARLY_URL:BOT_SERVER_LATE_URL
-}
 
 function getOnlineBotUsers():any[]{
     let members=bot.servers[SERVER_ID].members
@@ -51,10 +37,9 @@ function hasServiceBot():boolean{
 }
 
 bot.on('ready', function() {
-    //console.log("bot logged",bot)
-    console.log('Logged in as %s - %s\n', bot.username, bot.id)
+    console.log('logged in as %s - %s', bot.username, bot.id)
 
-    console.log("has service bot",hasServiceBot())
+    console.log("service bot",hasServiceBot()?"avaialable":"not available")
 })
 
 bot.on('message', function(user:any, userID:any, channelID:any, message:any, event:any) {
@@ -65,28 +50,49 @@ bot.on('message', function(user:any, userID:any, channelID:any, message:any, eve
                 console.log("command",user)                
                 if(!hasServiceBot()){
                     console.log("no service")
-                    let botServerUrl=getBotServerUrlByDayOfMonth()                    
-                    let msg=
-`Hi **${user}** ! I noticed you are trying to issue a bot command.\n`+
-`:exclamation: No bot is online currently to service your command.\n`+
-`I'm activating bots ( <${botServerUrl}> ).\n`
+                    let msg=`Hi **${user}** ! Noticed you are trying to issue a bot command.\n`+
+                        `:exclamation: No bot is online currently to service your command.\n`+
+                        `Activating main bots ( <${BOT_SERVER_MAIN_URL}> ) .\n`
                     bot.sendMessage({
                         to: channelID,
                         message: msg
                     })
-                    console.log("activating",botServerUrl)                    
-                    http.get(botServerUrl,(res:any)=>{
-                        const statusCode = res.statusCode
-                        console.log("activation result",statusCode)
+                    console.log("activating",BOT_SERVER_MAIN_URL)                    
+                    http.get(BOT_SERVER_MAIN_URL,(res:any)=>{
+                        let statusCode = res.statusCode                        
+                        console.log("main bot activation result",statusCode)
                         if(statusCode=="200"){
                             msg=`:thumbsup: Bots are up. **Please issue your command now.**`                            
+                            bot.sendMessage({
+                                to: channelID,
+                                message: msg
+                            })
                         }else{
-                            msg=`:triangular_flag_on_post: There was a problem activating bots.`
-                        }                                               
-                        bot.sendMessage({
-                            to: channelID,
-                            message: msg
-                        })
+                            msg=`:triangular_flag_on_post: There was a problem activating main bot.\n`+
+                                `Falling back to reserve bot ( <${BOT_SERVER_RESERVE_URL}> ) .`
+                            bot.sendMessage({
+                                to: channelID,
+                                message: msg
+                            })
+                            http.get(BOT_SERVER_RESERVE_URL,(res:any)=>{
+                                let statusCode = res.statusCode                                
+                                console.log("reserve bot activation result",statusCode)
+                                if(statusCode=="200"){
+                                    msg=`:thumbsup: Reserve bot is up. **Please issue your command now.**`                            
+                                    bot.sendMessage({
+                                        to: channelID,
+                                        message: msg
+                                    })
+                                }else{
+                                    msg=`:triangular_flag_on_post: There was a problem activating reserve bot.\n`+
+                                        `Please contact the system admin.`
+                                    bot.sendMessage({
+                                        to: channelID,
+                                        message: msg
+                                    })
+                                }
+                            })
+                        }                                                                       
                     })
                 }                
             }
