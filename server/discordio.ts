@@ -63,7 +63,7 @@ bot.on('message', function(user:any, userID:any, channelID:any, message:any, eve
             let prefix=message.split("")[0]
             if(prefix=="+"){
                 console.log("command",user)                
-                if(true||!hasServiceBot()){
+                if(!hasServiceBot()){
                     console.log("no service")
                     let botServerUrl=getBotServerUrlByDayOfMonth()                    
                     let msg=
@@ -76,7 +76,7 @@ bot.on('message', function(user:any, userID:any, channelID:any, message:any, eve
                     })
                     console.log("activating",botServerUrl)                    
                     http.get(botServerUrl,(res:any)=>{
-                        const { statusCode } = res
+                        const statusCode = res.statusCode
                         console.log("activation result",statusCode)
                         if(statusCode=="200"){
                             msg=`:thumbsup: Bots are up. **Please issue your command now.**`                            

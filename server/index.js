@@ -153,7 +153,7 @@ bot.on('message', function (user, userID, channelID, message, event) {
             let prefix = message.split("")[0];
             if (prefix == "+") {
                 console.log("command", user);
-                if (true || !hasServiceBot()) {
+                if (!hasServiceBot()) {
                     console.log("no service");
                     let botServerUrl = getBotServerUrlByDayOfMonth();
                     let msg = `Hi **${user}** ! I noticed you are trying to issue a bot command.\n` +
@@ -165,7 +165,7 @@ bot.on('message', function (user, userID, channelID, message, event) {
                     });
                     console.log("activating", botServerUrl);
                     http.get(botServerUrl, (res) => {
-                        const { statusCode } = res;
+                        const statusCode = res.statusCode;
                         console.log("activation result", statusCode);
                         if (statusCode == "200") {
                             msg = `:thumbsup: Bots are up. **Please issue your command now.**`;
