@@ -47,8 +47,20 @@ bot.on('message', function(user:any, userID:any, channelID:any, message:any, eve
         if (message.length>0){
             let prefix=message.split("")[0]
             if(prefix=="+"){
-                console.log("command",user)                
-                if(!hasServiceBot()){
+                let parts=message.substring(1).split(" ")
+                let command=parts[0]
+                let args=[]
+                if(parts.length>1){
+                    parts.shift()
+                    args=parts
+                }
+                console.log("user",user,"command",command,"args",args)                
+                if(command=="ping"){
+                    bot.sendMessage({
+                        to: channelID,
+                        message: "pong"
+                    })
+                }else if(!hasServiceBot()){
                     console.log("no service")
                     let msg=`Hi **${user}** ! Noticed you are trying to issue a bot command.\n`+
                         `:exclamation: No bot is online currently to service your command.\n`+
@@ -62,10 +74,14 @@ bot.on('message', function(user:any, userID:any, channelID:any, message:any, eve
                         let statusCode = res.statusCode                        
                         console.log("main bot activation result",statusCode)
                         if(statusCode=="200"){
-                            msg=`:thumbsup: Bots are up. **Please issue your command now.**`                            
+                            msg=`:thumbsup: Main bots are up. **You can issue commands now.**`                            
                             bot.sendMessage({
                                 to: channelID,
                                 message: msg
+                            })
+                            bot.sendMessage({
+                                to: channelID,
+                                message: message
                             })
                         }else{
                             msg=`:triangular_flag_on_post: There was a problem activating main bot.\n`+
@@ -78,10 +94,14 @@ bot.on('message', function(user:any, userID:any, channelID:any, message:any, eve
                                 let statusCode = res.statusCode                                
                                 console.log("reserve bot activation result",statusCode)
                                 if(statusCode=="200"){
-                                    msg=`:thumbsup: Reserve bot is up. **Please issue your command now.**`                            
+                                    msg=`:thumbsup: Reserve bot is up. **You can issue commands now.**`                            
                                     bot.sendMessage({
                                         to: channelID,
                                         message: msg
+                                    })
+                                    bot.sendMessage({
+                                        to: channelID,
+                                        message: message
                                     })
                                 }else{
                                     msg=`:triangular_flag_on_post: There was a problem activating reserve bot.\n`+
