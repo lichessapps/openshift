@@ -79,10 +79,12 @@ bot.on('message', function(user:any, userID:any, channelID:any, message:any, eve
                                 to: channelID,
                                 message: msg
                             })
-                            bot.sendMessage({
-                                to: channelID,
-                                message: message
-                            })
+                            setTimeout(function(){
+                                bot.sendMessage({
+                                    to: channelID,
+                                    message: message
+                                })
+                            },3000)                            
                         }else{
                             msg=`:triangular_flag_on_post: There was a problem activating main bot.\n`+
                                 `Falling back to reserve bot ( <${BOT_SERVER_RESERVE_URL}> ) .`
@@ -99,10 +101,12 @@ bot.on('message', function(user:any, userID:any, channelID:any, message:any, eve
                                         to: channelID,
                                         message: msg
                                     })
-                                    bot.sendMessage({
-                                        to: channelID,
-                                        message: message
-                                    })
+                                    setTimeout(function(){
+                                        bot.sendMessage({
+                                            to: channelID,
+                                            message: message
+                                        })
+                                    },3000)                                    
                                 }else{
                                     msg=`:triangular_flag_on_post: There was a problem activating reserve bot.\n`+
                                         `Please contact the system admin.`

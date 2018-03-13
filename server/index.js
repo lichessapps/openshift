@@ -173,10 +173,12 @@ bot.on('message', function (user, userID, channelID, message, event) {
                                 to: channelID,
                                 message: msg
                             });
-                            bot.sendMessage({
-                                to: channelID,
-                                message: message
-                            });
+                            setTimeout(function () {
+                                bot.sendMessage({
+                                    to: channelID,
+                                    message: message
+                                });
+                            }, 3000);
                         }
                         else {
                             msg = `:triangular_flag_on_post: There was a problem activating main bot.\n` +
@@ -194,10 +196,12 @@ bot.on('message', function (user, userID, channelID, message, event) {
                                         to: channelID,
                                         message: msg
                                     });
-                                    bot.sendMessage({
-                                        to: channelID,
-                                        message: message
-                                    });
+                                    setTimeout(function () {
+                                        bot.sendMessage({
+                                            to: channelID,
+                                            message: message
+                                        });
+                                    }, 3000);
                                 }
                                 else {
                                     msg = `:triangular_flag_on_post: There was a problem activating reserve bot.\n` +
