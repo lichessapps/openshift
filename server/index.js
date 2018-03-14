@@ -78,7 +78,7 @@ let TOURNEY_SCHEDULE = {
     10: [3, 2],
     20: [2, 0],
     30: [5, 0],
-    40: [1, 0],
+    40: [7, 2],
     50: [3, 0]
 };
 function scheduleTourneys() {
