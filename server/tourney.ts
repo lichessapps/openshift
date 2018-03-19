@@ -15,7 +15,7 @@ function createTourney(lila2:string,time:number,inc:number,callback:any){
     form.append("waitMinutes",`${LICHESS_TOURNEY_WAIT_MINUTES}`);
     form.append("clockTime",`${time}`);
     form.append("clockIncrement",`${inc}`);
-    form.append("minutes","120");
+    form.append("minutes","110");
     //console.log(form)
     let headers={
         "Referer":`${LICHESS_TOURNEY_URL}`,
