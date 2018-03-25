@@ -73,14 +73,7 @@ function createTourney(lila2, time, inc, callback) {
         then((response) => response.text()).
         then((content) => callback(content));
 }
-let TOURNEY_SCHEDULE = {
-    0: [1, 0],
-    10: [3, 2],
-    20: [2, 0],
-    30: [5, 0],
-    40: [7, 2],
-    50: [3, 0]
-};
+let TOURNEY_SCHEDULE = {};
 function scheduleTourneys() {
     for (let key in TOURNEY_SCHEDULE) {
         let value = TOURNEY_SCHEDULE[key];

@@ -1,10 +1,10 @@
 let TOURNEY_SCHEDULE:{[id:number]:number[]}={
-    0:[1,0],
+    /*0:[1,0],
     10:[3,2],
     20:[2,0],
     30:[5,0],
     40:[7,2],
-    50:[3,0]
+    50:[3,0]*/
 }
 
 function scheduleTourneys(){
