@@ -18,9 +18,9 @@ function scheduleTourneys(){
             console.log(`scheduler create tourney ${time} ${inc}`)        
             login(LICHESS_USER,LICHESS_PASS,(lila2:string)=>{
                 console.log(`login ok`)
-                createTourney(lila2,time,inc,(content:any)=>{
+                /*createTourney(lila2,time,inc,(content:any)=>{
                     //console.log(content)
-                })
+                })*/
             })
         })
     }

@@ -57,7 +57,7 @@
     "server/lichess.ts",
     "server/tourney.ts",
     "server/scheduler.ts",
-    "server/discordio.ts",
+    /*"server/discordio.ts",*/
     "server/index.ts"
   ]
 }
