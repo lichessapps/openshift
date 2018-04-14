@@ -23,6 +23,7 @@ function createTourney(lila2:string,name:string,waitMinutes:string,time:string,i
     form.append("conditions.minRating.rating","1800");
     form.append("conditions.minRating.perf","atomic");
     form.append("conditions.titled","false");
+    form.append("berserkable","true");
     //console.log(form)
     let headers={
         "Referer":`${LICHESS_TOURNEY_URL}`,
